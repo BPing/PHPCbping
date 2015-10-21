@@ -1,4 +1,5 @@
 <?php
+require "define.php";
 require_once 'Utils\MethodParams.class.php';
 
 use Utils\MethodParams;
@@ -73,7 +74,7 @@ class MethodParamsTest extends PHPUnit_Framework_TestCase
 
         $str = self::$C->GetParams("test", "test", "/hell$/");
         $this->assertTrue($str == "test", self::$C->getError());
-}
+    }
 
     public function testPOST()
     {
@@ -131,17 +132,17 @@ class MethodParamsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($str == "hello", $str . "校验正确");
 
         //不存在的方法
-        $notExist=1000;
+        $notExist = 1000;
         $str = self::$C->Params("fileName", null, function ($arg_name) {
             return true;
-        },$notExist);
+        }, $notExist);
 
         $this->assertTrue($str == null, self::$C->getError());
 
         //方法参数类型不正确
         $str = self::$C->Params("fileName", null, function ($arg_name) {
             return true;
-        },array());
+        }, array());
 
         $this->assertTrue($str == null, self::$C->getError());
 
@@ -151,16 +152,16 @@ class MethodParamsTest extends PHPUnit_Framework_TestCase
 
     public function testFilterInput()
     {
-  //--coverage-html ./coverage
+        //--coverage-html ./coverage
         $str = self::$C->FilterInput(INPUT_GET, 'noExist', "default");
         $this->assertTrue($str == "default", self::$C->getError());
 
-        $res = filter_input(INPUT_GET,'test');
+        $res = filter_input(INPUT_GET, 'test');
 
-        $str = self::$C->FilterInput(INPUT_GET, 'test', "default",FILTER_SANITIZE_STRING );
-        $this->assertTrue($str == "hello", $res.$str.self::$C->getError());
+        $str = self::$C->FilterInput(INPUT_GET, 'test', "default", FILTER_SANITIZE_STRING);
+        $this->assertTrue($str == "hello", $res . $str . self::$C->getError());
 
-        $str = self::$C->FilterInput(INPUT_GET, 'test', "default",FILTER_VALIDATE_INT);
+        $str = self::$C->FilterInput(INPUT_GET, 'test', "default", FILTER_VALIDATE_INT);
         $this->assertTrue($str == "default", self::$C->getError());
     }
 

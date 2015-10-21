@@ -1,5 +1,5 @@
 <?php
-
+require "define.php";
 require_once "Context.class.php";
 require_once "Exceptions/EchoException.class.php";
 require_once "Utils/MethodParams.class.php";

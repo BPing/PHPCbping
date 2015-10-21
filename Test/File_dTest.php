@@ -1,5 +1,5 @@
 <?php
-
+require "define.php";
 require "Registers/driver/File_d.class.php";
 require_once "AppHelper.class.php";
 

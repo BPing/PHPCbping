@@ -1,5 +1,6 @@
 <?php
 
+require "define.php";
 require_once 'Loader.class.php';
 
 /**

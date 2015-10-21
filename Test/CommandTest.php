@@ -1,5 +1,5 @@
 <?php
-
+//require "define.php";
 require_once "AppHelper.class.php";
 require_once "Loader.class.php";
 require_once "function.php";
@@ -12,6 +12,8 @@ require_once "Exceptions/ResolverException.class.php";
 require_once "TestControllers/DefaultController.class.php";
 require_once "Utils/MethodParams.class.php";
 
+define("APPPATH", dirname(__FILE__));
+
 /**
  * 命令单元测试
  *
@@ -23,7 +25,7 @@ class CommandTest extends PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
-        AppHelper::Instance()->config("APP_ROOT", dirname(__FILE__));
+        AppHelper::Instance()->config("TEST_APPPATH", dirname(__FILE__));
         AppHelper::Instance()->config("APP_CTRL", "TestControllers");
     }
 

@@ -16,11 +16,22 @@ class ControlResolver
     //控制器命名空间（也是主目录）
     private static $_ctrl_namespace;
 
+    /**
+     * 应用目录
+     * @var string
+     */
+    private static $_AppPath = APPPATH;
+
     function __construct()
     {
         self::$_ctrl_namespace = trim(AppHelper::Instance()->config("APP_CTRL"), ' \\/');
         self::$_default_cmd = trim(AppHelper::Instance()->config("DEFAULT_CMD"), ' \\/');
         self::$_base_cmd = new ReflectionClass("\\Controller");
+
+        //测试使用
+        if(null!=AppHelper::Instance()->config("TEST_APPPATH")){
+            self::$_AppPath=AppHelper::Instance()->config("TEST_APPPATH");
+        }
     }
 
     /**
@@ -47,7 +58,7 @@ class ControlResolver
         //实现控制器目录下多级组合
         $cmd = trim(str_replace(array("."), $step, $cmd));
         //应用根目录,控制器目录，文件后缀名
-        $app_root = rtrim(AppHelper::Instance()->config("APP_ROOT"), ' \\/');
+        $app_root = rtrim(self::$_AppPath, ' \\/');
         $app_ctrl = self::$_ctrl_namespace;
         $ctrl_suffix = AppHelper::Instance()->config("CTRL_FILE_SUFFIX");
 

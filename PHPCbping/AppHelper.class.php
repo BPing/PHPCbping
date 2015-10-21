@@ -1,7 +1,6 @@
 <?php
-
-
 defined("EXT_NOT_SUPPORT") or define("EXT_NOT_SUPPORT", "没有支持的解析函数存在");
+defined("FILE_NOT_FOUND") or define("FILE_NOT_FOUND", "配置文件不存在");
 
 /**
  * 应用程序助手类，处理应用配置信息
@@ -19,6 +18,17 @@ class AppHelper
     private static $config_ = array();
 
     private static $instance_;
+    /**
+     * 应用目录
+     * @var string
+     */
+    private static $_AppPath = APPPATH;
+
+    /**
+     *
+     * @var string
+     */
+    private static $_SysPath = SYSPATH;
 
     private function __construct()
     {
@@ -35,9 +45,9 @@ class AppHelper
     /** 加载系统配置和用户配置 */
     private function _loadConfig()
     {
-        self::$config_ = self::loadConfig('App.config.php');
+        self::$config_ = self::loadConfig(self::$_SysPath . 'App.config.php');
         if (isset(self::$config_["USER_CONFIG_FILE_PATH"])) {
-            $arr = self::loadConfig(self::$config_["USER_CONFIG_FILE_PATH"]); //加载用户配置
+            $arr = self::loadConfig(self::$_AppPath . self::$config_["USER_CONFIG_FILE_PATH"]); //加载用户配置
             if (is_array($arr))
                 self::$config_ = array_merge(self::$config_, $arr);
         }
@@ -77,6 +87,9 @@ class AppHelper
      */
     public static function loadConfig($arg_file, $arg_parse = null)
     {
+        $arg_file = str_replace('\\', '/', $arg_file);
+        if (!is_file($arg_file))
+            self::_throw(FILE_NOT_FOUND . ":" . $arg_file);
         $ext = pathinfo($arg_file, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'php':

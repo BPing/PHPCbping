@@ -1,10 +1,15 @@
 <?php
-
+require "define.php";
 require "AppHelper.class.php";
 
 
 class AppHelperTest extends PHPUnit_Framework_TestCase
 {
+
+    public function pathHandler($path)
+    {
+        return str_replace('\\', '/', $path);
+    }
 
 
     public function testLoadConfig()
@@ -28,7 +33,7 @@ class AppHelperTest extends PHPUnit_Framework_TestCase
         }
 
         $config = AppHelper::loadConfig(__DIR__ . "/temp/config.exit", "parse");
-        $this->assertEquals(__DIR__ . "/temp/config.exit", $config["name"], "load the config with own parse's method ");
+        $this->assertEquals($this->pathHandler(__DIR__ . "/temp/config.exit"), $config["name"], "load the config with own parse's method ");
 
         //加载不存在解析办法的
         try {

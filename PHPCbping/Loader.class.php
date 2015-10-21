@@ -78,7 +78,7 @@ class Loader
      *
      * 加载失败则会抛出异常，
      * 成功则返回。
-     * @notice 注意务必正确设置 $_cl_dir 和 $_file_suffix
+     * @notice 务必正确设置 $_cl_dir 和 $_file_suffix
      * @see $_cl_dir
      * @see $_file_suffix
      * @param string $arg_class 对象类名
@@ -95,7 +95,7 @@ class Loader
         // $class = str_replace('\\', '/', $class);
         foreach (self::$_cl_dir as $dir) {
             foreach (self::$_file_suffix as $suffix) {
-                if (!file_exists($dir . $class . $suffix))
+                if (!is_file($dir . $class . $suffix))
                     continue;
                 require_once($dir . $class . $suffix);
                 if (class_exists($arg_class))
