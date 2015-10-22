@@ -13,8 +13,9 @@ class AutoloadTest extends PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-        self::$app_root = __DIR__;
-        Loader::init(array(self::$app_root . '/Library/'), array('.class.php'));
+//        self::$app_root = __DIR__;
+        Loader::init(array('Library/'), array('.class.php'));
+        Loader::setBaseDir(__DIR__ . DIRECTORY_SEPARATOR);
         spl_autoload_register("Loader::autoload");
     }
 
@@ -32,7 +33,7 @@ class AutoloadTest extends PHPUnit_Framework_TestCase
      */
     public function testAutoload()
     {
-        Loader::setClassDir(array(self::$app_root . '/Library/'));
+        Loader::setClassDir(array('Library/'));
         Loader::setSuffix(array('.class.php'));
 
         $cl = new TestClassLoad();
@@ -47,7 +48,7 @@ class AutoloadTest extends PHPUnit_Framework_TestCase
      */
     public function testClassNotExist()
     {
-        Loader::init(array(self::$app_root . '/Library/'), array('.class.php'));
+        Loader::init(array('Library/'), array('.class.php'));
         $cl = new ClassNotExist();
     }
 
@@ -95,7 +96,7 @@ class AutoloadTest extends PHPUnit_Framework_TestCase
      */
     public function testSubDirExist()
     {
-        Loader::appendClassDir(self::$app_root . '/Library/SubDir/');
+        Loader::appendClassDir('Library/SubDir/');
         $cl = new TestSubDir();
         throw new Exception("the class \"TestSubDir\" is found");
     }
@@ -106,7 +107,7 @@ class AutoloadTest extends PHPUnit_Framework_TestCase
      */
     public function testNameClassExist()
     {
-        Loader::appendClassDir(self::$app_root . '/Library/SubDir/');
+        Loader::appendClassDir('Library/SubDir/');
         $cl = new SubDir\NameClass();
         throw new Exception("the class \"NameClass\" is found");
     }

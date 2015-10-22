@@ -21,11 +21,6 @@ return array(
     //@notice 路径相对于APPPATH ，最终路径为： APPPATH.config["USER_CONFIG_FILE_PATH"]
     //@助手类
     "USER_CONFIG_FILE_PATH" => 'Config/config.php',
-//    /**
-//     * 应用目录
-//     * @deprecated
-//     */
-//    "APP_ROOT" => "",
 
     //控制器目录，相对APPPATH
     //也是命名空间
@@ -43,11 +38,6 @@ return array(
 
     //控制器文件后缀名
     "CTRL_FILE_SUFFIX" => ".class.php",
-
-    //类的文件后缀名集合
-    //@type array
-    //@used 类自动记载器
-    "CLASS_FILE_SUFFIX" => array(".class.php", ".absclass.php", ".interface.php"),
 
     // 是否进行数据压缩
     // 仅当此变量为打开和压缩函数存在时
@@ -73,7 +63,17 @@ return array(
     //@notice 路径相对于工程目录 (BASEPATH)
     //@type array
     //@used 类自动记载器
-    "APP_AUTOLOAD_PATH" => array(),
+    "APP_AUTOLOAD_PATH" => array(
+        "PHPCbping/",
+        "PHPCbping/Exceptions/",
+        "PHPCbping/Registers/",
+        "PHPCbping/Utils/",
+    ),
+
+    //类的文件后缀名集合
+    //@type array
+    //@used 类自动记载器
+    "CLASS_FILE_SUFFIX" => array(".class.php", ".absclass.php", ".interface.php"),
 
 //////////////////////////////////////////////////////////////////////////////////////
 //系统配置
