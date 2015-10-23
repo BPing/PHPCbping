@@ -1,5 +1,4 @@
 <?php
-require_once "define.php";
 require_once 'Loader.class.php';
 require_once 'AppHelper.class.php';
 require_once 'function.php';
@@ -44,9 +43,6 @@ class PHPCbping
                     '_COOKIE',
                     'GLOBALS',
                     'HTTP_RAW_POST_DATA',
-                    'system_path',
-                    'application_folder',
-                    'view_folder',
                     '_protected',
                     '_registered'
                 );
@@ -65,6 +61,9 @@ class PHPCbping
                 }
             }
         }
+
+        //全局变量定义
+        require_once "define.php";
 
         /*
         * ------------------------------------------------------
