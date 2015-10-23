@@ -22,6 +22,8 @@ class FunctionTest extends PHPUnit_Framework_TestCase
      */
     public function testError()
     {
+
+    //    set_status_header("505");
 //        set_error_handler("_error_handle");
 //        trigger_error("hello world", E_USER_ERROR);
     }

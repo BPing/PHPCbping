@@ -11,9 +11,6 @@ require_once "Exceptions/EchoException.class.php";
 require_once "Exceptions/ResolverException.class.php";
 require_once "TestControllers/DefaultController.class.php";
 require_once "Utils/MethodParams.class.php";
-
-define("APPPATH", dirname(__FILE__));
-
 /**
  * 命令单元测试
  *

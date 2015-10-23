@@ -33,6 +33,7 @@ class AutoloadTest extends PHPUnit_Framework_TestCase
      */
     public function testAutoload()
     {
+        Loader::setBaseDir(__DIR__ . DIRECTORY_SEPARATOR);
         Loader::setClassDir(array('Library/'));
         Loader::setSuffix(array('.class.php'));
 

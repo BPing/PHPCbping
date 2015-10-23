@@ -59,6 +59,17 @@ if (!function_exists('log_message')) {
 }
 
 // ------------------------------------------------------------------------
+if (!function_exists('get_config')) {
+    /**
+     *
+     */
+    function get_config()
+    {
+
+    }
+}
+
+// ------------------------------------------------------------------------
 if (!function_exists('_exception_handle')) {
     /**
      * 自定义异常处理
@@ -232,3 +243,23 @@ if (!function_exists('set_status_header')) {
     }
 }
 
+// ------------------------------------------------------------------------
+if (!function_exists('is_php')) {
+    /**
+     * php的版本号是否大于等于提供的版本号
+     *
+     * @param    string
+     * @return    bool    如果大于或等于则返回 true
+     */
+    function is_php($version)
+    {
+        static $_is_php;
+        $version = (string)$version;
+
+        if (!isset($_is_php[$version])) {
+            $_is_php[$version] = version_compare(PHP_VERSION, $version, '>=');
+        }
+
+        return $_is_php[$version];
+    }
+}

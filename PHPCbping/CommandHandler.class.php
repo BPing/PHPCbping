@@ -19,7 +19,6 @@ class CommandHandler
     function init()
     {
 
-
     }
 
     /**
