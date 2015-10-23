@@ -83,6 +83,8 @@ class Logs implements \LogI
             return false;
         }
         try {
+            //目录不存在则创建
+            is_readable(dirname(self::$logFile_)) or mkdir(dirname(self::$logFile_), 0700, true);
             //读写方式打开，将文件指针指向文件末尾。如果文件不存在则尝试创建之。
             self::$fileHandle_ = fopen(self::$logFile_, 'a+');
 
@@ -178,6 +180,16 @@ class Logs implements \LogI
     public function getError()
     {
         return $this->errMsg_;
+    }
+
+    /**
+     *  for test
+     * @param $arg_msg
+     */
+    public function logTest($arg_msg)
+    {
+        $this->_logMessage($arg_msg, 'ddd');
+
     }
 }
 

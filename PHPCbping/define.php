@@ -16,6 +16,9 @@ defined("SYSPATH") or define("SYSPATH", __DIR__ . DIRECTORY_SEPARATOR);         
 //框架测试目录
 defined("SYS_TEST_PATH") or define("SYS_TEST_PATH", __DIR__ . DIRECTORY_SEPARATOR);  //
 
+//版本号
+defined("VERSION") or define("VERSION", '0.0.1');                                    //
+
 //////////////////////////////////////////////////////////////////////////////////////
 
 
