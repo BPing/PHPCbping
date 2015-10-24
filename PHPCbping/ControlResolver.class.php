@@ -27,10 +27,15 @@ class ControlResolver
         self::$_ctrl_namespace = trim(AppHelper::Instance()->config("APP_CTRL"), ' \\/');
         self::$_default_cmd = trim(AppHelper::Instance()->config("DEFAULT_CMD"), ' \\/');
         self::$_base_cmd = new ReflectionClass("\\Controller");
+    }
 
-        //测试使用
-        if(null!=AppHelper::Instance()->config("TEST_APPPATH")){
-            self::$_AppPath=AppHelper::Instance()->config("TEST_APPPATH");
+    /**
+     * @param $arg_path
+     */
+    public static function setAppPath($arg_path)
+    {
+        if (is_dir($arg_path)) {
+            self::$_AppPath = $arg_path;
         }
     }
 
