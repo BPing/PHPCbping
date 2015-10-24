@@ -35,19 +35,19 @@ PHPCbping::start();
 * 其他参数：用户自定义
 
 #### 配置项
-> 请查看：[配置注释]()
+> 请查看：[配置注释](https://github.com/BPing/PHPCbping/blob/dev/Doc/%E9%85%8D%E7%BD%AE%E6%B3%A8%E9%87%8A.md)<br>
 
 #### 项目目录
 
-*  应用目录：[App/]()
-*  用户配置目录：[App/Config]()
+*  应用目录：[App/](https://github.com/BPing/PHPCbping/tree/dev/App)
+*  用户配置目录：[App/Config](https://github.com/BPing/PHPCbping/tree/dev/App/Config)
   
-> 用户配置目录是可配置的，具体查看配置说明文档[配置注释]()。<br>
+> 用户配置目录是可配置的，具体查看配置说明文档[配置注释](https://github.com/BPing/PHPCbping/blob/dev/Doc/%E9%85%8D%E7%BD%AE%E6%B3%A8%E9%87%8A.md)。<br>
 > 用户配置将会覆盖系统默认的配置项。
 
-*  控制器目录：[App/Controllers]()
+*  控制器目录：[App/Controllers](https://github.com/BPing/PHPCbping/tree/dev/App/Controllers)
 
-> 控制器目录是可配置的，具体查看配置说明文档[配置注释]()。<br>
+> 控制器目录是可配置的，具体查看配置说明文档[配置注释](https://github.com/BPing/PHPCbping/blob/dev/Doc/%E9%85%8D%E7%BD%AE%E6%B3%A8%E9%87%8A.md)。<br>
 > 控制器支持二级子目录的存在<br>
 > 所有控制类必需继承父抽象控制类：[Controller](https://github.com/BPing/PHPCbping/blob/dev/PHPCbping/Controller.absclass.php)<br>
 
