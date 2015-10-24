@@ -49,7 +49,7 @@ PHPCbping::start();
 
 > 控制器目录是可配置的，具体查看配置说明文档[配置注释]()。<br>
 > 控制器支持二级子目录的存在<br>
-> 所有控制类必需继承父抽象控制类：[Controller](https://github.com/BPing/PHPCbping/blob/dev/PHPCbping/Controller.absclass.php)
+> 所有控制类必需继承父抽象控制类：[Controller](https://github.com/BPing/PHPCbping/blob/dev/PHPCbping/Controller.absclass.php)<br>
 
 ```
 class test extends \Controller
