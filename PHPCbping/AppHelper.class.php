@@ -84,6 +84,7 @@ class AppHelper
      * @param string $arg_file 配置文件名
      * @param string $arg_parse 配置解析方法 有些格式需要用户自己解析
      * @return mix
+     * @throws Exception
      */
     public static function loadConfig($arg_file, $arg_parse = null)
     {

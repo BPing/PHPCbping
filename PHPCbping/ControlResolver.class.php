@@ -27,6 +27,7 @@ class ControlResolver
         self::$_ctrl_namespace = trim(AppHelper::Instance()->config("APP_CTRL"), ' \\/');
         self::$_default_cmd = trim(AppHelper::Instance()->config("DEFAULT_CMD"), ' \\/');
         self::$_base_cmd = new ReflectionClass("\\Controller");
+        //  self::$_AppPath = defined(APPPATH) ? APPPATH : '';
     }
 
     /**
