@@ -14,5 +14,25 @@ Welcome to PHPCbping!
 * 开发人员务必认真阅读[Doc/](https://github.com/BPing/PHPCbping/tree/dev/Doc)目录下的文档文件。所有开发文档资料都放在此目录下
 
 ## <i class="icon-upload"></i> 使用
+#### 单文件入口：index.php
+```
+<?php
+require_once 'PHPCbping/PHPCbping.class.php';
+//启动程序
+PHPCbping::start();
+```
+#### 目录
+
+*  应用目录：[App/]()
+*  用户配置目录：[App/Config]()
+  
+> 用户配置目录是可配置的，具体查看配置说明文档[配置注释]()。
+>	用户配置将会覆盖系统默认的配置项。
+
+*  控制器目录：[App/Controllers]()
+
+> 控制器目录是可配置的，具体查看配置说明文档[配置注释]()。
+
+
 ## <i class="icon-upload"></i> 结束语
  			
