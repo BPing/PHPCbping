@@ -1,12 +1,8 @@
 Welcome to PHPCbping!
 ===================
-You can insert a table of contents using the marker `[TOC]`:
-
-[TOC]
-
 
 ## <i class="icon-upload"></i> 概要
-		内容：一个简单的php框架，主要是满足个人开发使用。
+		内容：一个简单的php框架，主要是满足个人开发使用，面向后端API开发。
 		目标：轻量级的仅满足一般开发使用(由开发人员决定)。
 		框架：主要是在命令模式基础上扩展而成的。 
 
