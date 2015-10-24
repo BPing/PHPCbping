@@ -14,4 +14,5 @@ Welcome to PHPCbping!
 * 开发人员务必认真阅读[Doc/](https://github.com/BPing/PHPCbping/tree/dev/Doc)目录下的文档文件。所有开发文档资料都放在此目录下
 
 ## <i class="icon-upload"></i> 使用
+## <i class="icon-upload"></i> 结束语
  			
