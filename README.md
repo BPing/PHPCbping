@@ -13,6 +13,7 @@ Welcome to PHPCbping!
 * 请看文档[编码风格要求](https://github.com/BPing/PHPCbping/blob/dev/Doc/%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC%E8%A6%81%E6%B1%82.md)，此文档里面描述本项目所遵守的规则。因为所有规则都是开发人员定义，所以并不完善，望指正！
 * 开发人员务必认真阅读[Doc/](https://github.com/BPing/PHPCbping/tree/dev/Doc)目录下的文档文件。所有开发文档资料都放在此目录下
 
+
 ## <i class="icon-upload"></i> 使用
 #### 单文件入口：index.php
 ```
@@ -67,4 +68,8 @@ class test extends \Controller
 ```
 
 ## <i class="icon-upload"></i> 结束语
+在这里我必须向大家坦白，我实现这个简单的框架主要目的还是为了学习，当然我也存在着想拥有一个简单个人的php开发框架以方便开发一些个人项目的想法。
+
+
+
  			
