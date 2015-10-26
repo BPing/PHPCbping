@@ -82,6 +82,8 @@ class PHPCbping
         */
 
         spl_autoload_register("Loader::autoload");
+        Loader::setClassDir((array)AppHelper::Instance()->config("APP_AUTOLOAD_PATH"));
+        Loader::setSuffix((array)AppHelper::Instance()->config("CLASS_FILE_SUFFIX"));
 
         /*
         * ------------------------------------------------------
@@ -99,4 +101,6 @@ class PHPCbping
         log_message(LOG_INFO, "运行核心程序................");
         CommandHandler::run();
     }
+
+
 }
