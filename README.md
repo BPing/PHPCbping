@@ -30,8 +30,10 @@ PHPCbping::start();
 * cmd(必需)
 
 >  此参数描述控制的信息,例如
-> - cmd=test:  控制器test，就是说 控制器文件名为：Test.class.php; 类名：Test
-> - cmdtest.test1:  控制器test，就是说 控制器文件名为：Test1.class.php,此文件在子目录 test/下; 类名：Test1 
+> - cmd=Test:  控制器test，就是说 控制器文件名为：Test.class.php; 类名：Test
+> - cmd=test.test1:  控制器test，就是说 控制器文件名为：test1.class.php,此文件在子目录 test/下; 类名：test1 
+
+>  **Note：** 大小写敏感
 
 * 其他参数：用户自定义
 
