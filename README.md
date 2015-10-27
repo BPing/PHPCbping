@@ -59,7 +59,7 @@ PHPCbping::start();
 class test extends \Controller
 {
     /**
-     * 最终执行入口
+     * 执行入口
      * @param $arg_context
      */
     function  doExecute(\Context $arg_context)
