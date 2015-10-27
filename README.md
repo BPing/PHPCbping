@@ -7,6 +7,7 @@ Welcome to PHPCbping!
 		框架：主要是在命令模式基础上扩展而成的。 
 
 架构的序列图：https://www.processon.com/view/link/558a701fe4b0ccebb524bb71
+> **Note:** 框架目前没有实现视图层和模型层，只有控制层
 
 ## <i class="icon-upload"></i> 规范
 * 目前没有遵守也未考虑遵守[PSR](http://www.php-fig.org/)编码规范。
@@ -69,7 +70,7 @@ class test extends \Controller
 }
 ```
 
-> **Note:** 框架目前没有实现视图层和模型层，只有控制层
+
 
 ## <i class="icon-upload"></i> 结束语
 在这里我必须向大家坦白，我实现这个简单的框架主要目的还是为了学习，当然我也存在着想拥有一个简单个人的php开发框架以方便开发一些个人项目的想法。
