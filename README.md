@@ -28,6 +28,12 @@ require_once 'PHPCbping/PHPCbping.class.php';
 PHPCbping::start();
 ```
 
+#### hello world
+
+> 启动内置服务器：php -S localhost:8080 <br>
+> 浏览器输入地址：http://localhost:8080/?cmd=HelloWorld <br>
+> 浏览器显示：{"hello":"hello world"}
+
 #### 请求参数
 
 		http://localhost:post/index.php?cmd=test&other=o
