@@ -30,7 +30,7 @@ PHPCbping::start();
 
 #### hello world
 
-> 启动内置服务器：php -S localhost:8080 <br>
+> 启动php(5.4+)内置服务器：php -S localhost:8080 <br>
 > 浏览器输入地址：http://localhost:8080/?cmd=HelloWorld <br>
 > 浏览器显示：{"hello":"hello world"}
 
