@@ -74,6 +74,8 @@ class test extends \Controller
 }
 ```
 
+#### 代码覆盖率情况
+![code Coverage](https://github.com/BPing/PHPCbping/blob/dev/Doc/TestCoverage.png?raw=true)
 
 
 ## <i class="icon-upload"></i> 结束语
