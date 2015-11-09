@@ -70,8 +70,8 @@ class ControlResolver
 
         //构建文件目录和类
         $file_path = $app_root . $step . $app_ctrl . $step . $cmd . $ctrl_suffix;
-        $class_name = "$app_ctrl\\" . (strripos($cmd, $step) ? substr($cmd, strripos($cmd, $step) + 1) : $cmd);
-//        echo "\n", $file_path, "\n", $class_name, "\n";
+        $class_name = "\\$app_ctrl\\" . (strripos($cmd, $step) ? substr($cmd, strripos($cmd, $step) + 1) : $cmd);
+        //     echo "\n", $file_path, "\n", $class_name, "\n";
         if (!file_exists($file_path)) {
             throw new \Exceptions\ResolverException("Command file '$cmd' not found");
         }

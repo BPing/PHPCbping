@@ -1,11 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: p
- * Date: 2015/11/9
- * Time: 15:44
- */
 
-class HelloWorld {
+namespace Controllers;
+
+class HelloWorld extends \Controller
+{
+    /**
+     * 最终执行入口
+     * @param $arg_context
+     */
+    function  doExecute(\Context $arg_context)
+    {
+        $arg_context->json_echo(array("hello" => "hello world"));
+     //   trigger_error("hello world", E_USER_ERROR);
+    }
 
 }

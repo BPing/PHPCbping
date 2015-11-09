@@ -8,7 +8,7 @@
 defined("BASEPATH") or define("BASEPATH", dirname(__DIR__) . DIRECTORY_SEPARATOR);  //
 
 //应用目录
-defined("APPPATH") or define("APPPATH", BASEPATH . 'APP' . DIRECTORY_SEPARATOR);    //
+defined("APPPATH") or define("APPPATH", BASEPATH . 'App' . DIRECTORY_SEPARATOR);    //
 
 //框架目录
 defined("SYSPATH") or define("SYSPATH", __DIR__ . DIRECTORY_SEPARATOR);             //

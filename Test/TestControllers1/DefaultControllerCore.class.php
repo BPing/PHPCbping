@@ -1,5 +1,5 @@
 <?php
-namespace TestControllers;
+namespace TestControllers1;
 
 /**
  * 默认控制器
@@ -7,7 +7,7 @@ namespace TestControllers;
  * Class DefaultController
  * @package Controllers
  */
-class DefaultController extends \Controller
+class DefaultControllerCore extends \Controller
 {
 
     /**

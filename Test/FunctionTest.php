@@ -1,7 +1,7 @@
 <?php
 require "define.php";
 require_once "function.php";
-require_once 'Log.interface.php';
+require_once 'LogI.interface.php';
 require_once 'Utils\Logs.class.php';
 require_once 'Utils\UtilFactory.class.php';
 

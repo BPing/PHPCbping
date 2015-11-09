@@ -1,9 +1,9 @@
 <?php
 
-namespace TestControllers;
+namespace TestControllers1;
 
 
-class Nocmd
+class NocmdCore
 {
 
 }

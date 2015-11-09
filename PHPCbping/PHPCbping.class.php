@@ -1,4 +1,6 @@
 <?php
+//全局变量定义
+require_once "define.php";
 require_once 'Loader.class.php';
 require_once 'AppHelper.class.php';
 require_once 'function.php';
@@ -13,7 +15,6 @@ class PHPCbping
      */
     public static function start()
     {
-
         /*
         * ------------------------------------------------------
         *  设置时区
@@ -62,8 +63,6 @@ class PHPCbping
             }
         }
 
-        //全局变量定义
-        require_once "define.php";
 
         /*
         * ------------------------------------------------------

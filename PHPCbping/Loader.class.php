@@ -108,10 +108,13 @@ class Loader
                 if (!is_file($file))
                     continue;
                 require_once($file); //
-                if (class_exists($arg_class))
+                if (class_exists($arg_class) || interface_exists($arg_class))
                     return;
             }
         }
+
+        if (function_exists("log_message"))
+            log_message(LOG_ERR, 'the class "' . $arg_class . '" is not found');
 
         throw new Exception('the class "' . $arg_class . '" is not found');
     }

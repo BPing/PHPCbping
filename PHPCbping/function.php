@@ -89,7 +89,7 @@ if (!function_exists('_exception_handle')) {
             $error['line'] = $e->getLine();
         }
         $error['trace'] = $e->getTraceAsString();
-        ob_end_clean();
+//        ob_end_clean();
         // 发送404信息
         set_status_header(404);
         halt($error);

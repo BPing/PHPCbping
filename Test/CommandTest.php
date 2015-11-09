@@ -20,11 +20,22 @@ require_once "Utils/MethodParams.class.php";
 class CommandTest extends PHPUnit_Framework_TestCase
 {
 
+    static $_APP_CTRL;
+
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
         ControlResolver::setAppPath(dirname(__FILE__) . '/');
+        self::$_APP_CTRL = AppHelper::Instance()->config("APP_CTRL");
         AppHelper::Instance()->config("APP_CTRL", "TestControllers");
+    }
+
+    public static function tearDownAfterClass()
+    {
+        parent::tearDownAfterClass();
+        ControlResolver::setAppPath(APPPATH);
+        AppHelper::Instance()->config("APP_CTRL", self::$_APP_CTRL);
+        AppHelper::Instance()->config("CMD_FILTER", ''); //恢复默认
     }
 
     /**
@@ -91,7 +102,7 @@ class CommandTest extends PHPUnit_Framework_TestCase
     public function testMain()
     {
         AppHelper::Instance()->config("CMD_FILTER", ''); //恢复默认
-        $_GET["cmd"] = "test.test";
+        $_POST["cmd"] = "test.test";
         CommandHandler::run();
         $this->assertEquals("test.test", file_get_contents(dirname(__FILE__) . "/temp/testForCmd.text"));
 

@@ -4,4 +4,6 @@
  */
 return array(
     "LOG_PATH" => 'Log/',
+
+   // "DEFAULT_CMD" => 'HelloWorld',
 );

@@ -42,15 +42,17 @@ class CommandHandler
             $ctrl_r = new ControlResolver();
             $ctrl = $ctrl_r->getController($context);
             $ctrl->execute($context);
+
         } catch (\Exceptions\ResolverException $e) {
-
-            $context->err_echo("ResolverException:" . $e->getMessage());
+            log_message(LOG_ERR, "ResolverException:" . $e->getMessage());
+            $context->err_echo("the Server Exception");
         } catch (\Exceptions\EchoException $e) {
-
-            $context->err_echo("EchoException:" . $e->getMessage());
+            log_message(LOG_ERR, "EchoException:" . $e->getMessage());
+            $context->err_echo("the Server Exception");
         } catch (Exception $e) {
+            log_message(LOG_ERR, "Exception:" . $e->getMessage());
+            $context->err_echo("the Server Exception");
 
-            $context->err_echo("Exception:" . $e->getMessage());
         }
 
     }

@@ -6,10 +6,10 @@
  * Time: 19:46
  */
 
-namespace TestControllers;
+namespace TestControllers1;
 
 
-class test extends \Controller
+class testCore extends \Controller
 {
 
     /**
