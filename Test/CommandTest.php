@@ -101,6 +101,7 @@ class CommandTest extends PHPUnit_Framework_TestCase
      */
     public function testMain()
     {
+        ControlResolver::setAppPath(dirname(__FILE__) . '/');
         AppHelper::Instance()->config("CMD_FILTER", ''); //恢复默认
         $_POST["cmd"] = "test.test";
         CommandHandler::run();
