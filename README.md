@@ -22,7 +22,7 @@ Welcome to PHPCbping!
 
 ## <i class="icon-upload"></i> 使用
 #### 单文件入口：index.php
-```
+```php
 <?php
 require_once 'PHPCbping/PHPCbping.class.php';
 //启动程序
@@ -66,7 +66,7 @@ PHPCbping::start();
 > 控制器支持二级子目录的存在<br>
 > 所有控制类必需继承父抽象控制类：[Controller](https://github.com/BPing/PHPCbping/blob/dev/PHPCbping/Controller.absclass.php)<br>
 
-```
+```php
 class test extends \Controller
 {
     /**
