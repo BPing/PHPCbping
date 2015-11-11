@@ -59,11 +59,12 @@ class AppRegistry
      *
      * @param $arg_key string
      * @param $arg_value mixed
+     * @param $arg_expire int 有效时间（S）
      * @return mixed
      */
-    public function  set($arg_key, $arg_value)
+    public function  set($arg_key, $arg_value, $arg_expire = null)
     {
-        return $this->_driver->set($arg_key, $arg_value);
+        return $this->_driver->set($arg_key, $arg_value, $arg_expire);
     }
 
     /**
@@ -93,11 +94,12 @@ class AppRegistry
      *
      * @param $arg_key 需要更新的键名
      * @param $arg_value 更新后的值
+     * @param $arg_expire int 有效时间（S）
      * @return mixed
      */
-    public function update($arg_key, $arg_value)
+    public function update($arg_key, $arg_value, $arg_expire = null)
     {
-        return $this->_driver->update($arg_key, $arg_value);
+        return $this->_driver->update($arg_key, $arg_value, $arg_expire);
     }
 
     /**
