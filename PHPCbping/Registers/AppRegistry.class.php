@@ -59,7 +59,7 @@ class AppRegistry
      *
      * @param $arg_key string
      * @param $arg_value mixed
-     * @param $arg_expire int 有效时间（S）
+     * @param $arg_expire int 有效时间（单位S）
      * @return mixed
      */
     public function  set($arg_key, $arg_value, $arg_expire = null)
