@@ -37,7 +37,7 @@ PHPCbping::start();
 
 #### 请求参数
 
-		http://localhost:post/index.php?cmd=test&other=o
+		http://localhost:port/index.php?cmd=test&other=o
 
 * cmd(必需)
 
