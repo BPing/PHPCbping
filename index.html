@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Phpcbping by BPing</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="without-description">
+        <h1>Phpcbping</h1>
+        <p></p>
+        <p class="view"><a href="https://github.com/BPing/PHPCbping">View the Project on GitHub <small>BPing/PHPCbping</small></a></p>
+        <ul>
+          <li><a href="https://github.com/BPing/PHPCbping/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/BPing/PHPCbping/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/BPing/PHPCbping">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="welcome-to-phpcbping" class="anchor" href="#welcome-to-phpcbping" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to PHPCbping!</h1>
+
+<p>.. contents::
+    :local:
+    :depth: 1
+    :backlinks: none</p>
+
+<h2>
+<a id="-概要" class="anchor" href="#-%E6%A6%82%E8%A6%81" aria-hidden="true"><span class="octicon octicon-link"></span></a><i></i> 概要</h2>
+
+<pre><code>    内容：一个简单的php框架，主要是满足个人开发使用，面向后端API开发。
+    目标：轻量级的仅满足一般开发使用(由开发人员决定)。
+    框架：主要是在命令模式基础上扩展而成的。 
+</code></pre>
+
+<p>架构的序列图：<a href="https://www.processon.com/view/link/558a701fe4b0ccebb524bb71">https://www.processon.com/view/link/558a701fe4b0ccebb524bb71</a></p>
+
+<blockquote>
+<p><strong>Note:</strong> 框架目前没有实现视图层和模型层，只有控制层</p>
+</blockquote>
+
+<h2>
+<a id="-规范" class="anchor" href="#-%E8%A7%84%E8%8C%83" aria-hidden="true"><span class="octicon octicon-link"></span></a><i></i> 规范</h2>
+
+<ul>
+<li>目前没有遵守也未考虑遵守<a href="http://www.php-fig.org/">PSR</a>编码规范。</li>
+<li>请看文档<a href="https://github.com/BPing/PHPCbping/blob/dev/Doc/%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC%E8%A6%81%E6%B1%82.md">编码风格要求</a>，此文档里面描述本项目所遵守的规则。因为所有规则都是开发人员定义，所以并不完善，望指正！</li>
+<li>开发人员务必认真阅读<a href="https://github.com/BPing/PHPCbping/tree/dev/Doc">Doc/</a>目录下的文档文件。所有开发文档资料都放在此目录下</li>
+<li>如果没有特别说明，统一采用UTF-8编码格式</li>
+</ul>
+
+<h2>
+<a id="-使用" class="anchor" href="#-%E4%BD%BF%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a><i></i> 使用</h2>
+
+<h4>
+<a id="单文件入口indexphp" class="anchor" href="#%E5%8D%95%E6%96%87%E4%BB%B6%E5%85%A5%E5%8F%A3indexphp" aria-hidden="true"><span class="octicon octicon-link"></span></a>单文件入口：index.php</h4>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-pse">&lt;?php</span><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">require_once</span> <span class="pl-s"><span class="pl-pds">'</span>PHPCbping/PHPCbping.class.php<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1"><span class="pl-c">//启动程序</span></span>
+<span class="pl-s1"><span class="pl-c1">PHPCbping</span><span class="pl-k">::</span>start();</span></pre></div>
+
+<h4>
+<a id="hello-world" class="anchor" href="#hello-world" aria-hidden="true"><span class="octicon octicon-link"></span></a>hello world</h4>
+
+<blockquote>
+<ul>
+<li>启动php(5.4+)内置服务器：php -S localhost:8080 <br>
+</li>
+<li>浏览器输入地址：http://localhost:8080/index.php?cmd=HelloWorld <br>
+</li>
+<li>浏览器显示：{"hello":"hello world"}</li>
+</ul>
+</blockquote>
+
+<h4>
+<a id="请求参数" class="anchor" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0" aria-hidden="true"><span class="octicon octicon-link"></span></a>请求参数</h4>
+
+<pre><code>    http://localhost:port/index.php?cmd=test&amp;other=o
+</code></pre>
+
+<ul>
+<li>cmd(必需)</li>
+</ul>
+
+<blockquote>
+<p>此参数描述控制的信息,例如</p>
+
+<ul>
+<li>cmd=Test:  控制器test，就是说 控制器文件名为：Test.class.php; 类名：Test</li>
+<li>
+<p>cmd=test.test1:  控制器test，就是说 控制器文件名为：test1.class.php,此文件在子目录 test/下; 类名：test1 </p>
+
+<p><strong>Note：</strong> 大小写敏感</p>
+</li>
+</ul>
+</blockquote>
+
+<ul>
+<li>其他参数：用户自定义</li>
+</ul>
+
+<h4>
+<a id="配置项" class="anchor" href="#%E9%85%8D%E7%BD%AE%E9%A1%B9" aria-hidden="true"><span class="octicon octicon-link"></span></a>配置项</h4>
+
+<blockquote>
+<p>请查看：<a href="https://github.com/BPing/PHPCbping/blob/dev/Doc/%E9%85%8D%E7%BD%AE%E6%B3%A8%E9%87%8A.md">配置注释</a><br></p>
+</blockquote>
+
+<h4>
+<a id="项目目录" class="anchor" href="#%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>项目目录</h4>
+
+<ul>
+<li> 应用目录：<a href="https://github.com/BPing/PHPCbping/tree/dev/App">App/</a>
+</li>
+<li> 用户配置目录：<a href="https://github.com/BPing/PHPCbping/tree/dev/App/Config">App/Config</a>
+</li>
+</ul>
+
+<blockquote>
+<p>用户配置目录是可配置的，具体查看配置说明文档<a href="https://github.com/BPing/PHPCbping/blob/dev/Doc/%E9%85%8D%E7%BD%AE%E6%B3%A8%E9%87%8A.md">配置注释</a>。<br>
+用户配置将会覆盖系统默认的配置项。</p>
+</blockquote>
+
+<ul>
+<li> 控制器目录：<a href="https://github.com/BPing/PHPCbping/tree/dev/App/Controllers">App/Controllers</a>
+</li>
+</ul>
+
+<blockquote>
+<p>控制器目录是可配置的，具体查看配置说明文档<a href="https://github.com/BPing/PHPCbping/blob/dev/Doc/%E9%85%8D%E7%BD%AE%E6%B3%A8%E9%87%8A.md">配置注释</a>。<br>
+控制器支持二级子目录的存在<br>
+所有控制类必需继承父抽象控制类：<a href="https://github.com/BPing/PHPCbping/blob/dev/PHPCbping/Controller.absclass.php">Controller</a><br></p>
+</blockquote>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">class</span> <span class="pl-en">test</span> <span class="pl-k">extends</span> <span class="pl-c1">\</span><span class="pl-e">Controller</span></span>
+<span class="pl-s1">{</span>
+<span class="pl-s1">    <span class="pl-c">/**</span></span>
+<span class="pl-s1"><span class="pl-c">     * 执行入口</span></span>
+<span class="pl-s1"><span class="pl-c">     * <span class="pl-k">@param</span> $arg_context</span></span>
+<span class="pl-s1"><span class="pl-c">     */</span></span>
+<span class="pl-s1">    <span class="pl-k">function</span>  <span class="pl-en">doExecute</span>(<span class="pl-c1">\</span><span class="pl-c1">Context</span> <span class="pl-smi">$arg_context</span>)</span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">        <span class="pl-smi">$other</span> <span class="pl-k">=</span> <span class="pl-smi">$arg_context</span><span class="pl-k">-&gt;</span>Params(<span class="pl-s"><span class="pl-pds">"</span>other<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1">        <span class="pl-smi">$arg_context</span><span class="pl-k">-&gt;</span>json_echo(<span class="pl-s"><span class="pl-pds">"</span>hello world:<span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$other</span>);</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h2>
+<a id="代码覆盖率情况" class="anchor" href="#%E4%BB%A3%E7%A0%81%E8%A6%86%E7%9B%96%E7%8E%87%E6%83%85%E5%86%B5" aria-hidden="true"><span class="octicon octicon-link"></span></a><i></i>代码覆盖率情况</h2>
+
+<p><img src="https://github.com/BPing/PHPCbping/blob/dev/Doc/TestCoverage.png?raw=true" alt="code Coverage"></p>
+
+<h2>
+<a id="-参考" class="anchor" href="#-%E5%8F%82%E8%80%83" aria-hidden="true"><span class="octicon octicon-link"></span></a><i></i> 参考</h2>
+
+<ul>
+<li><a href="http://document.thinkphp.cn/manual_3_2.html">ThinkPHP</a></li>
+<li><a href="http://codeigniter.org.cn/">CodeIgniter</a></li>
+</ul>
+
+<h2>
+<a id="-结束语" class="anchor" href="#-%E7%BB%93%E6%9D%9F%E8%AF%AD" aria-hidden="true"><span class="octicon octicon-link"></span></a><i></i> 结束语</h2>
+
+<p>在这里我必须向大家坦白，我实现这个简单的框架主要目的还是为了学习，当然我也存在着想拥有一个简单个人的php开发框架以方便开发一些个人项目的想法。</p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/BPing">BPing</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
