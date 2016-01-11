@@ -1,6 +1,7 @@
 <?php
 
 namespace Registers;
+use Exceptions\RegistersDriverException;
 
 /**
  * Class driver
@@ -89,14 +90,25 @@ abstract class Driver
 
 
     /**
-     * @param string $arg_type
+     * 获取缓存驱动类
+     *
+     * @param int $arg_type
      * @param array $arg_options
      * @return driver
-     * @throw
+     * @throws RegistersDriverException
      */
-    public static function getInstance($arg_type = '', $arg_options = array())
+    public static function getInstance($arg_type = FILE_D, $arg_options = array())
     {
-
+        switch ($arg_type) {
+            case APC_D:
+                return new Apc_d($arg_options);
+                break;
+            case FILE_D:
+                return new File_d($arg_options);
+                break;
+            default:
+                throw new RegistersDriverException('the type doesn\'t exist');
+        }
     }
 
 }
