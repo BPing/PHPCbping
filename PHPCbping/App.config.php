@@ -29,7 +29,7 @@ return array(
     //默认的控制器
     //文件名对应为 DefaultController.class.php
     //@used 命令解析器
-    "DEFAULT_CMD" => "DefaultController",
+    "DEFAULT_CMD" => "HelloWorld",
 
     //控制器过滤
     //如果为空，则是不过滤
