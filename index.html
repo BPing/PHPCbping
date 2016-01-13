@@ -1,38 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8">
+    <title>Phpcbping by BPing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <title>Phpcbping by BPing</title>
   </head>
-
   <body>
-    <header>
-      <div class="inner">
-        <h1>Phpcbping</h1>
-        <h2></h2>
-        <a href="https://github.com/BPing/PHPCbping" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
+    <section class="page-header">
+      <h1 class="project-name">Phpcbping</h1>
+      <h2 class="project-tagline"></h2>
+      <a href="https://github.com/BPing/PHPCbping" class="btn">View on GitHub</a>
+      <a href="https://github.com/BPing/PHPCbping/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/BPing/PHPCbping/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
+    <section class="main-content">
+      <h1>
 <a id="welcome-to-phpcbping" class="anchor" href="#welcome-to-phpcbping" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to PHPCbping!</h1>
 
 <h2>
-<a id="-概要" class="anchor" href="#-%E6%A6%82%E8%A6%81" aria-hidden="true"><span class="octicon octicon-link"></span></a><i></i> 概要</h2>
+<a id="目录" class="anchor" href="#%E7%9B%AE%E5%BD%95" aria-hidden="true"><span class="octicon octicon-link"></span></a><a name="index"></a>目录</h2>
+
+<ul>
+<li><a href="#gy">概要</a></li>
+<li><a href="#gf">规范</a></li>
+<li><a href="#sy">使用</a></li>
+<li><a href="#dmfgl">代码覆盖率情况</a></li>
+<li><a href="#ckzl">参考资料</a></li>
+<li><a href="#jsy">结束语</a></li>
+</ul>
+
+<h2>
+<a id="-概要" class="anchor" href="#-%E6%A6%82%E8%A6%81" aria-hidden="true"><span class="octicon octicon-link"></span></a><i name="gy"></i> 概要</h2>
 
 <pre><code>    内容：一个简单的php框架，主要是满足个人开发使用，面向后端API开发。
     目标：轻量级的仅满足一般开发使用(由开发人员决定)。
@@ -46,7 +49,7 @@
 </blockquote>
 
 <h2>
-<a id="-规范" class="anchor" href="#-%E8%A7%84%E8%8C%83" aria-hidden="true"><span class="octicon octicon-link"></span></a><i></i> 规范</h2>
+<a id="-规范" class="anchor" href="#-%E8%A7%84%E8%8C%83" aria-hidden="true"><span class="octicon octicon-link"></span></a><i name="gf"></i> 规范</h2>
 
 <ul>
 <li>目前没有遵守也未考虑遵守<a href="http://www.php-fig.org/">PSR</a>编码规范。</li>
@@ -56,7 +59,7 @@
 </ul>
 
 <h2>
-<a id="-使用" class="anchor" href="#-%E4%BD%BF%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a><i></i> 使用</h2>
+<a id="-使用" class="anchor" href="#-%E4%BD%BF%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a><i name="sy"></i> 使用</h2>
 
 <h4>
 <a id="单文件入口indexphp" class="anchor" href="#%E5%8D%95%E6%96%87%E4%BB%B6%E5%85%A5%E5%8F%A3indexphp" aria-hidden="true"><span class="octicon octicon-link"></span></a>单文件入口：index.php</h4>
@@ -153,12 +156,12 @@
 <span class="pl-s1">}</span></pre></div>
 
 <h2>
-<a id="代码覆盖率情况" class="anchor" href="#%E4%BB%A3%E7%A0%81%E8%A6%86%E7%9B%96%E7%8E%87%E6%83%85%E5%86%B5" aria-hidden="true"><span class="octicon octicon-link"></span></a><i></i>代码覆盖率情况</h2>
+<a id="代码覆盖率情况" class="anchor" href="#%E4%BB%A3%E7%A0%81%E8%A6%86%E7%9B%96%E7%8E%87%E6%83%85%E5%86%B5" aria-hidden="true"><span class="octicon octicon-link"></span></a><i name="dmfgl"></i>代码覆盖率情况</h2>
 
 <p><img src="https://github.com/BPing/PHPCbping/blob/dev/Doc/TestCoverage.png?raw=true" alt="code Coverage"></p>
 
 <h2>
-<a id="-参考" class="anchor" href="#-%E5%8F%82%E8%80%83" aria-hidden="true"><span class="octicon octicon-link"></span></a><i></i> 参考</h2>
+<a id="-参考" class="anchor" href="#-%E5%8F%82%E8%80%83" aria-hidden="true"><span class="octicon octicon-link"></span></a><i name="ckzl"></i> 参考</h2>
 
 <ul>
 <li><a href="http://document.thinkphp.cn/manual_3_2.html">ThinkPHP</a></li>
@@ -166,27 +169,17 @@
 </ul>
 
 <h2>
-<a id="-结束语" class="anchor" href="#-%E7%BB%93%E6%9D%9F%E8%AF%AD" aria-hidden="true"><span class="octicon octicon-link"></span></a><i></i> 结束语</h2>
+<a id="-结束语" class="anchor" href="#-%E7%BB%93%E6%9D%9F%E8%AF%AD" aria-hidden="true"><span class="octicon octicon-link"></span></a><i name="jsy"></i> 结束语</h2>
 
 <p>在这里我必须向大家坦白，我实现这个简单的框架主要目的还是为了学习，当然我也存在着想拥有一个简单个人的php开发框架以方便开发一些个人项目的想法。</p>
-        </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/BPing/PHPCbping/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/BPing/PHPCbping/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/BPing/PHPCbping">Phpcbping</a> is maintained by <a href="https://github.com/BPing">BPing</a>.</span>
 
-          <p class="repo-owner"><a href="https://github.com/BPing/PHPCbping"></a> is maintained by <a href="https://github.com/BPing">BPing</a>.</p>
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
 
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
+    </section>
 
   
   </body>
