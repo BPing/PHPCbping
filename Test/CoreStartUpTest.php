@@ -21,6 +21,7 @@ class CoreStartUpTest extends PHPUnit_Framework_TestCase
         $CPath = APPPATH . AppHelper::Instance()->config("APP_CTRL");
 
         rename(dirname(__FILE__) . "/TestControllers1/", $CPath);
+        chmod($CPath,'0777');
 
         if (!is_dir(APPPATH . "temp/"))
 
