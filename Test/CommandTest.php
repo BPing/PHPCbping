@@ -28,6 +28,7 @@ class CommandTest extends PHPUnit_Framework_TestCase
         ControlResolver::setAppPath(dirname(__FILE__) . '/');
         self::$_APP_CTRL = AppHelper::Instance()->config("APP_CTRL");
         AppHelper::Instance()->config("APP_CTRL", "TestControllers");
+        AppHelper::Instance()->config("DEFAULT_CMD", 'DefaultController');
     }
 
     public static function tearDownAfterClass()
