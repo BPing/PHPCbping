@@ -39,9 +39,13 @@ class CommandTest extends PHPUnit_Framework_TestCase
         AppHelper::Instance()->config("CMD_FILTER", ''); //恢复默认
     }
 
+    protected function setUp()
+    {
+        AppHelper::Instance()->config("CMD_FILTER", ''); //恢复默认
+    }
+
     /**
      * 文件不存在异常
-     *
      * @throws \Exceptions\ResolverException
      */
     public function testNoCommandFile()
@@ -55,47 +59,6 @@ class CommandTest extends PHPUnit_Framework_TestCase
         $ctrl = $ctrl_r->getController($context);
     }
 
-    /**
-     * 类不存在异常
-     *
-     * @expectedException        Exceptions\ResolverException
-     * @expectedExceptionMessage Command 'Nocmd' is not a command
-     */
-    public function testNoCmd()
-    {
-        $_GET["cmd"] = "Nocmd";
-        $context = new Context();
-        $ctrl_r = new ControlResolver();
-        $ctrl = $ctrl_r->getController($context);
-    }
-
-    /**
-     * 不是控制器异常
-     *
-     * @expectedException        Exceptions\ResolverException
-     * @expectedExceptionMessage Command 'NoClassExist' not found
-     */
-    public function testNoClassExist()
-    {
-        $_GET["cmd"] = "NoClassExist";
-        $context = new Context();
-        $ctrl_r = new ControlResolver();
-        $ctrl = $ctrl_r->getController($context);
-    }
-
-    /**
-     * 控制器无法通过过滤器异常
-     * @expectedException        Exceptions\ResolverException
-     * @expectedExceptionMessage Command cannot pass filter
-     */
-    public function testNoFilter()
-    {
-        AppHelper::Instance()->config("CMD_FILTER", '/Controller$/');
-        $_GET["cmd"] = "NoClassExist";
-        $context = new Context();
-        $ctrl_r = new ControlResolver();
-        $ctrl = $ctrl_r->getController($context);
-    }
 
     /**
      * 主要测试，测试正常情况
@@ -136,4 +99,48 @@ class CommandTest extends PHPUnit_Framework_TestCase
         CommandHandler::run();
         $this->assertEquals("default.default", file_get_contents(dirname(__FILE__) . "/temp/testForCmd.text"));
     }
+
+    /**
+     * 类不存在异常
+     *
+     * @expectedException        Exceptions\ResolverException
+     * @expectedExceptionMessage Command 'Nocmd' is not a command
+     */
+    public function testNoCmd()
+    {
+        $_GET["cmd"] = "Nocmd";
+        $context = new Context();
+        $ctrl_r = new ControlResolver();
+        $ctrl = $ctrl_r->getController($context);
+    }
+
+    /**
+     * 不是控制器异常
+     *
+     * @expectedException        Exceptions\ResolverException
+     * @expectedExceptionMessage Command 'NoClassExist' not found
+     */
+    public function testNoClassExist()
+    {
+        $_GET["cmd"] = "NoClassExist";
+        $context = new Context();
+        $ctrl_r = new ControlResolver();
+        $ctrl = $ctrl_r->getController($context);
+    }
+
+    /**
+     * 控制器无法通过过滤器异常
+     *
+     * @expectedException        Exceptions\ResolverException
+     * @expectedExceptionMessage Command cannot pass filter
+     */
+    public function testNoFilter()
+    {
+        AppHelper::Instance()->config("CMD_FILTER", '/Controller$/');
+        $_GET["cmd"] = "NoClassExist";
+        $context = new Context();
+        $ctrl_r = new ControlResolver();
+        $ctrl = $ctrl_r->getController($context);
+    }
+
 }
