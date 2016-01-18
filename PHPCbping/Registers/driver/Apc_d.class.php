@@ -1,9 +1,6 @@
 <?php
 
 namespace Registers;
-
-require "Driver.absclass.php";
-
 /**
  * Class Apc_d
  * @package Registers
