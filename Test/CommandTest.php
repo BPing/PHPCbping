@@ -44,21 +44,6 @@ class CommandTest extends PHPUnit_Framework_TestCase
         AppHelper::Instance()->config("CMD_FILTER", ''); //恢复默认
     }
 
-    /**
-     * 文件不存在异常
-     * @throws \Exceptions\ResolverException
-     */
-    public function testNoCommandFile()
-    {
-        $this->setExpectedException(
-            'Exceptions\\ResolverException', "Command file 'noHave' not found"
-        );
-        $_GET["cmd"] = "noHave";
-        $context = new Context();
-        $ctrl_r = new ControlResolver();
-        $ctrl = $ctrl_r->getController($context);
-    }
-
 
     /**
      * 主要测试，测试正常情况
@@ -98,6 +83,22 @@ class CommandTest extends PHPUnit_Framework_TestCase
         $_GET["cmd"] = "DefaultController";
         CommandHandler::run();
         $this->assertEquals("default.default", file_get_contents(dirname(__FILE__) . "/temp/testForCmd.text"));
+    }
+
+
+    /**
+     * 文件不存在异常
+     * @throws \Exceptions\ResolverException
+     */
+    public function testNoCommandFile()
+    {
+        $this->setExpectedException(
+            'Exceptions\\ResolverException', "Command file 'noHave' not found"
+        );
+        $_GET["cmd"] = "noHave";
+        $context = new Context();
+        $ctrl_r = new ControlResolver();
+        $ctrl = $ctrl_r->getController($context);
     }
 
     /**
