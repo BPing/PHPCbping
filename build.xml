@@ -6,7 +6,8 @@
     <!--改成您相应的应用目录和测试目录-->
     <property name="testdir" value="${basedir}/Test"/>
     <property name="appdir" value="${basedir}/PHPCbping"/>
-
+    <available file="${basedir}/build" property="build_path"/>
+    <available file="${basedir}/App/TestControllers1" property="TestControllers1_exist"/>
 
     <!-- Uncomment the following when the tools are in ${basedir}/vendor/bin -->
     <!-- <property name="toolsdir" value="${basedir}/vendor/bin/"/> -->
@@ -33,11 +34,11 @@
 
     <target name="clean"
             unless="clean.done"
+            if="build_path"
             description="Cleanup build artifacts">
         <delete includeEmptyDirs="true">
             <fileset dir="build" includes="**/*"/>
         </delete>
-        <available file="${basedir}/App/TestControllers1" property="TestControllers1_exist"/>
         <property name="clean.done" value="true"/>
     </target>
 
