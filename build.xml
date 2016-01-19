@@ -45,7 +45,7 @@
             unless="prepare.done"
             depends="clean,phpunit-init-clean"
             description="Prepare for build">
-        <chmod file="build" perm="0777"/>
+        <chmod dir="build" perm="0777"/>
         <mkdir dir="${basedir}/build/api"/>
         <mkdir dir="${basedir}/build/coverage"/>
         <mkdir dir="${basedir}/build/logs"/>
