@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpdox xmlns="http://xml.phpdox.net/config">
-    <project name="phpdox-project" source="${basedir}/PHPCbping" workdir="${basedir}/build/phpdox">
+    <project name="phpdox-project" source="${basedir}/PHPCbping" workdir="${basedir}/build/api/xml">
         <collector publiconly="false">
             <include mask="*.php"/>
         </collector>
-
-        <generator output="${basedir}/build">
-            <build engine="html" enabled="true" output="api">
+        <generator output="${basedir}/build/api">
+            <build engine="html" enabled="true" output="html">
                 <file extension="html"/>
             </build>
         </generator>
