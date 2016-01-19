@@ -87,7 +87,7 @@
         <exec executable="${toolsdir}phploc.bat" taskname="phploc">
             <arg value="--count-tests"/>
             <arg path="${appdir}"/>
-            <arg path="${testdir}"/>
+            <!--<arg path="${testdir}"/>-->
         </exec>
         <property name="phploc.done" value="true"/>
     </target>
@@ -103,7 +103,7 @@
             <arg value="--log-xml"/>
             <arg path="${basedir}/build/logs/phploc.xml"/>
             <arg path="${appdir}"/>
-            <arg path="${testdir}"/>
+            <!--<arg path="${testdir}"/>-->
         </exec>
         <property name="phploc.done" value="true"/>
     </target>
@@ -127,7 +127,7 @@
         <exec executable="${toolsdir}phpmd.bat" taskname="phpmd">
             <arg path="${appdir}"/>
             <arg value="text"/>
-            <arg path="${basedir}/build/phpmd.xml"/>
+            <arg path="${basedir}/phpmd.xml"/>
         </exec>
 
         <property name="phpmd.done" value="true"/>
