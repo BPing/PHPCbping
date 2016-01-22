@@ -9,11 +9,34 @@
     <available file="${basedir}/build" property="build_path"/>
     <available file="${basedir}/App/TestControllers1" property="TestControllers1_exist"/>
 
+
+    <property name="version-m" value="1.1"/>
+    <property name="version" value="1.1.0"/>
+    <property name="stability" value="stable"/>
+    <property name="releasenotes" value=""/>
+    <property name="buildnumber" value="${version}"/>
+    <property name="buildid" value="0101"/>
+    <property name="projectname" value="${ant.project.name}"/>
+    <property name="tarfile" value="${projectname}.${buildnumber}.${buildid}.tar.gz"/>
+    <property name="pkgfile" value="${projectname}.${version}.tgz"/>
+    <property name="distfile" value="dist/${tarfile}"/>
+    <property name="tests.dir" value="test"/>
+
+    <fileset id="api.tar.gz" dir=".">
+        <include name="Test/**"/>
+        <include name="PHPCbping/**"/>
+        <include name="App/**"/>
+        <include name="*.php"/>
+        <include name="*.xml"/>
+        <include name="*.md"/>
+    </fileset>
+
+
     <!-- Uncomment the following when the tools are in ${basedir}/vendor/bin -->
     <!-- <property name="toolsdir" value="${basedir}/vendor/bin/"/> -->
 
     <target name="build"
-            depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcpd-ci,phpunit,phpdox"
+            depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcpd-ci,phpunit,phpdox,tar"
             description=""/>
 
     <target name="build-parallel"
@@ -194,4 +217,21 @@
 
         <property name="phpdox.done" value="true"/>
     </target>
+
+    <target name="check" description="Check variables">
+        <fail unless="version" message="Version not defined!"/>
+        <fail unless="buildnumber" message="buildnumber not defined!"/>
+        <fail unless="buildid" message="buildid not defined!"/>
+        <delete dir="dist" failonerror="false"/>
+        <mkdir dir="dist"/>
+    </target>
+
+    <target name="tar" depends="check" description="Create tar file for release">
+        <echo message="Creating distribution tar for ${pkgfile} ${version}"/>
+        <delete file="${distfile}" failonerror="false"/>
+        <tar destfile="${distfile}" compression="gzip">
+            <fileset refid="api.tar.gz"/>
+        </tar>
+    </target>
+
 </project>
