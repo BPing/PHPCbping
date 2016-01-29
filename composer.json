@@ -1,0 +1,17 @@
+{
+  "name": "vendor_name/package_name",
+  "description": "description_text",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "author's name",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "backplane/phpunit": "4.6.x-dev",
+    "phpmd/phpmd": "2.2.3",
+    "xsolve-pl/phpmd": "1.4.0"
+  }
+}

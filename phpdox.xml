@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpdox xmlns="http://xml.phpdox.net/config">
+    <project name="phpdox-project" source="${basedir}/PHPCbping" workdir="${basedir}/build/api/xml">
+        <collector publiconly="false" backend="parser">
+            <include mask="*.php"/>
+        </collector>
+        <generator output="${basedir}/build/api">
+            <enrich base="${basedir}/build/logs">
+                <source type="build"/>
+                <source type="pmd"/>
+                <source type="phploc"/>
+            </enrich>
+            <build engine="html" enabled="true" output="html">
+                <file extension="html"/>
+            </build>
+        </generator>
+    </project>
+</phpdox>
