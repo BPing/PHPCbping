@@ -14,6 +14,7 @@ class AutoloadTest extends PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
 //        self::$app_root = __DIR__;
+        echo '.................................AutoloadTest...............................';
         Loader::init(array('Library/'), array('.class.php'));
         Loader::setBaseDir(__DIR__ . DIRECTORY_SEPARATOR);
         spl_autoload_register("Loader::autoload");

@@ -45,13 +45,13 @@ class CommandHandler
 
         } catch (\Exceptions\ResolverException $e) {
             log_message(LOG_ERR, "ResolverException:" . $e->getMessage());
-            $context->err_echo("the Server Exception");
+            $context->err_echo("the Server ResolverException\n");
         } catch (\Exceptions\EchoException $e) {
             log_message(LOG_ERR, "EchoException:" . $e->getMessage());
-            $context->err_echo("the Server Exception");
+            $context->err_echo("the Server EchoException\n");
         } catch (Exception $e) {
             log_message(LOG_ERR, "Exception:" . $e->getMessage());
-            $context->err_echo("the Server Exception");
+            $context->err_echo("the Server Exception\n");
 
         }
 

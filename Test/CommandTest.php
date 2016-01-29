@@ -24,6 +24,7 @@ class CommandTest extends PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
+        echo ".................................CommandTest...............................\n";
         parent::setUpBeforeClass();
         ControlResolver::setAppPath(dirname(__FILE__) . '/');
         self::$_APP_CTRL = AppHelper::Instance()->config("APP_CTRL");

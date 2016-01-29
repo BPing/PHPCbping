@@ -1,6 +1,17 @@
 # project
 .idea
-.coverage
+
 # composer
-vender/
+vendor/
+
+#build
+build/
+dist/
+
+#log
+Log/
+
+#test
+Cache/
+Coverage/
 

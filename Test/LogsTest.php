@@ -37,6 +37,8 @@ class LogsTest extends PHPUnit_Framework_TestCase
     {
         \Utils\Logs::getInstance()->init(array());
         $this->assertTrue(\Utils\UtilFactory::getLogHandle()->getError() == NOT_FILE_ERROR, NOT_FILE_ERROR . ":init error");
+        $log = \Utils\Logs::getInstance();
+        unset($log);
     }
 
 

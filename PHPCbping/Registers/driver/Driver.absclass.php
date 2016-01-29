@@ -52,6 +52,7 @@ abstract class Driver
      */
     abstract public function  set($arg_key, $arg_value, $arg_expire = null);
 
+
     /**
      * 删除缓存
      * @access public
@@ -59,7 +60,6 @@ abstract class Driver
      * @return boolean
      */
     abstract public function delete($arg_key);
-
 
     /**
      * @param $arg_key
