@@ -7,11 +7,15 @@ if (!function_exists('throw_e')) {
      *
      * @param  string $msg 异常消息
      * @param integer $code 异常代码 默认为0
+     * @param string $exc 异常类
      * @throws Exception
      */
-    function throw_e($msg, $code = 0)
+    function throw_e($msg, $code = 0, $exc = '')
     {
-        throw new \Exception($msg, $code);
+        if (null === $exc || !is_string($exc) || '' === $exc)
+            throw new \Exception($msg, $code);
+        $exc = $exc . 'Exception';
+        throw new $exc($msg, $code);
     }
 }
 
