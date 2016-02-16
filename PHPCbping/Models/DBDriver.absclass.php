@@ -53,6 +53,14 @@ abstract class DBDriver
     public $dbdriver = 'mysqli';
 
     /**
+     * Sub-driver
+     *
+     * @used-by    PdoDriver
+     * @var    string
+     */
+    public $subdriver;
+
+    /**
      * Persistent connection flag
      *
      * @var    bool
@@ -112,6 +120,7 @@ abstract class DBDriver
      */
     protected $_trans_failure = FALSE;
 
+    // --------------------------------------------------------------------
 
     public function __construct($params)
     {
@@ -122,6 +131,8 @@ abstract class DBDriver
         }
         log_message(LOG_INFO, 'Database Driver Class Initialized');
     }
+
+    // --------------------------------------------------------------------
 
     /**
      * 数据库初始化
@@ -172,15 +183,40 @@ abstract class DBDriver
      *
      *这是一个虚拟的方法，让驱动没有这样的
      *功能不声明它，而其他人将重写它。
-     * @return      void
+     * @return      mixed
      */
     public function reconnect()
     {
+        return false;
     }
 
+    // --------------------------------------------------------------------
+
+    /**
+     * 关闭 DB 连接
+     *
+     * @return    void
+     */
     public function close()
     {
+        if ($this->conn_id) {
+            $this->_close();
+            $this->conn_id = FALSE;
+        }
+    }
 
+    // --------------------------------------------------------------------
+
+    /**
+     * 关闭 DB 连接
+     *
+     * 此方法将被大部分drivers所覆盖。
+     *
+     * @return    void
+     */
+    protected function _close()
+    {
+        $this->conn_id = FALSE;
     }
 
     // --------------------------------------------------------------------
@@ -233,12 +269,27 @@ abstract class DBDriver
         return 'SELECT VERSION() AS ver';
     }
 
+    // --------------------------------------------------------------------
 
+    /**
+     * @param $sql
+     * @param bool|FALSE $binds
+     */
     public function query($sql, $binds = FALSE)
     {
 
     }
 
+    // --------------------------------------------------------------------
+
+    /**
+     * 执行sql语句
+     * @param $sql
+     */
+    protected function _execute($sql)
+    {
+    }
+    // --------------------------------------------------------------------
     /**
      * Start Transaction
      *
@@ -251,7 +302,7 @@ abstract class DBDriver
             return;
         }
 
-        // When transactions are nested we only begin/commit/rollback the outermost ones
+        //当事务被嵌套，我们只 begin/commit/rollback的最外面的
         if ($this->_trans_depth > 0) {
             $this->_trans_depth += 1;
             return;
@@ -274,7 +325,7 @@ abstract class DBDriver
             return FALSE;
         }
 
-        // When transactions are nested we only begin/commit/rollback the outermost ones
+        //当事务被嵌套，我们只 begin/commit/rollback的最外面的
         if ($this->_trans_depth > 1) {
             $this->_trans_depth -= 1;
             return TRUE;
@@ -282,17 +333,9 @@ abstract class DBDriver
             $this->_trans_depth = 0;
         }
 
-        // The query() function will set this flag to FALSE in the event that a query failed
+        //query() 函数将在这个事件标志设置为false，一个查询失败
         if ($this->_trans_status === FALSE OR $this->_trans_failure === TRUE) {
             $this->trans_rollback();
-
-//            // If we are NOT running in strict mode, we will reset
-//            // the _trans_status flag so that subsequent groups of transactions
-//            // will be permitted.
-//            if ($this->trans_strict === FALSE) {
-//                $this->_trans_status = TRUE;
-//            }
-
             log_message('debug', 'DB Transaction Failure');
             return FALSE;
         }
@@ -301,42 +344,37 @@ abstract class DBDriver
         return TRUE;
     }
 
-
-
     // --------------------------------------------------------------------
 
     /**
-     * Begin Transaction
+     * 事务开启
      *
      * @return    bool
      */
     abstract public function trans_begin();
 
-
     // --------------------------------------------------------------------
 
     /**
-     * Commit Transaction
+     * 事务提交
      *
      * @return    bool
      */
     abstract public function trans_commit();
 
-
     // --------------------------------------------------------------------
 
     /**
-     * Rollback Transaction
+     * 事务回滚
      *
      * @return    bool
      */
     abstract public function trans_rollback();
 
-
     // --------------------------------------------------------------------
 
     /**
-     * Lets you retrieve the transaction flag to determine if it has failed
+     *可以检索事务标志，以确定它是否已失败
      *
      * @return    bool
      */
@@ -344,6 +382,8 @@ abstract class DBDriver
     {
         return $this->_trans_status;
     }
+
+    // --------------------------------------------------------------------
 
     /**
      * @param $code
@@ -353,6 +393,7 @@ abstract class DBDriver
      */
     protected function display_error($code, $msg, $throw = true)
     {
+        log_message(LOG_ERR, 'DB  code:' . $code . ' message:' . $msg);
         if ($throw) {
             throw_e($msg, $code, 'DB');
         }
