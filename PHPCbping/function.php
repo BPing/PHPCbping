@@ -267,3 +267,38 @@ if (!function_exists('is_php')) {
         return $_is_php[$version];
     }
 }
+
+
+// --------------------------------------------------------------------
+
+if (!function_exists('remove_invisible_characters')) {
+    /**
+     * 移除不可见字符
+     *
+     * 这可以防止空字符存在ascii字符之间，如Java\0script
+     *
+     * @param    string
+     * @param    bool
+     * @return    string
+     */
+    function remove_invisible_characters($str, $url_encoded = TRUE)
+    {
+        $non_displayables = array();
+
+        //除了水平制表符（9），换行（10）和回车（13），删除del（127）
+        if ($url_encoded) {
+            $non_displayables[] = '/%0[0-8bcef]/';    // URL编码 00-08, 11, 12, 14, 15
+            $non_displayables[] = '/%1[0-9a-f]/';    // URL编码 16-31
+        }
+        //除了水平制表符，换行
+        $non_displayables[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';    // 00-08, 11, 12, 14-31, 127
+
+        do {
+            $str = preg_replace($non_displayables, '', $str, -1, $count);
+        } while ($count);
+
+        return $str;
+    }
+}
+
+// --------------------------------------------------------------------
