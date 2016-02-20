@@ -62,9 +62,10 @@ class PdoDriver extends DBDriver
 
     /**
      * 事务开启
+     * @param    bool $arg_test_mode
      * @return bool
      */
-    public function trans_begin()
+    public function trans_begin($arg_test_mode)
     {
         //当事务被嵌套，我们只 begin/commit/rollback的最外面的
         if (!$this->trans_enabled OR $this->_trans_depth > 0) {
@@ -72,9 +73,9 @@ class PdoDriver extends DBDriver
         }
 
         //重置事务失败标志。
-        //将$TEST_MODE标志被设置为TRUE，事务将被回滚
+        //将$arg_test_mode标志被设置为TRUE，事务将被回滚
         //即使查询产生一个成功的结果。
-        //   $this->_trans_failure = ($test_mode === TRUE);
+        $this->_trans_failure = ($arg_test_mode === TRUE);
         return $this->conn_id->beginTransaction();
     }
 
@@ -104,6 +105,25 @@ class PdoDriver extends DBDriver
         return $this->conn_id->rollBack();
     }
 
-}
+    /**
+     * 最后一次错误信息（错误代码和信息）
+     * @return array
+     */
+    public function error_info()
+    {
+        $error = array('code' => '00000', 'message' => '');
+        $pdo_error = $this->conn_id->errorInfo();
 
+        if (empty($pdo_error[0])) {
+            return $error;
+        }
+
+        $error['code'] = isset($pdo_error[1]) ? $pdo_error[0] . '/' . $pdo_error[1] : $pdo_error[0];
+        if (isset($pdo_error[2])) {
+            $error['message'] = $pdo_error[2];
+        }
+
+        return $error;
+    }
+}
 

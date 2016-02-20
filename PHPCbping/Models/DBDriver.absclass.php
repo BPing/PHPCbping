@@ -120,6 +120,24 @@ abstract class DBDriver
      */
     protected $_trans_failure = FALSE;
 
+    /**
+     * Bind marker
+     *
+     * Character used to identify values in a prepared statement.
+     *
+     * @var    string
+     */
+    public $bind_marker = '?';
+
+    /**
+     * Bind marker assoc
+     *
+     * Character used to identify values in a prepared statement.
+     *
+     * @var    string
+     */
+    public $bind_marker_assoc = ':';
+
     // --------------------------------------------------------------------
 
     public function __construct($params)
@@ -222,7 +240,7 @@ abstract class DBDriver
     // --------------------------------------------------------------------
 
     /**
-     * 使用的平台名字(mysql, mssql, etc...)
+     * 使用的平台名字(mysql, pdo, etc...)
      *
      * @return    string
      */
@@ -272,31 +290,219 @@ abstract class DBDriver
     // --------------------------------------------------------------------
 
     /**
-     * @param $sql
-     * @param bool|FALSE $binds
+     * 执行query
+     *
+     * @param $arg_sql
+     * @param array|bool $arg_binds =FALSE
+     * @param bool $arg_assoc =FALSE
+     * @return  boolean|object
      */
-    public function query($sql, $binds = FALSE)
+    public function query($arg_sql, $arg_binds = FALSE, $arg_assoc = FALSE)
     {
+        if ($arg_sql === '') {
+            $this->display_error('', 'Invalid query: ' . $arg_sql, false);
+            return FALSE;
+        }
 
+        //绑定变量处理
+        if ($arg_binds !== FALSE) {
+            $arg_sql = $this->compile_binds($arg_sql, $arg_binds, $arg_assoc);
+        }
+
+        //执行sql语句
+        if (FALSE === ($this->result_id = $this->_query($arg_sql))) {
+            //执行语句失败
+            $error = $this->error_info();
+            $this->display_error($error['code'], 'Query error: ' . $error['message'] . ' - Invalid query: ' . $arg_sql, false);
+            return FALSE;
+        }
+
+        //写入语句则返回true
+        if ($this->is_write_type($arg_sql)) return TRUE;
+
+        //查询读取语句则返回对象数据
+        //加载和实例化的结果集对象
+        $driver = $this->load_db_result();
+        $RES = new $driver($this);
+
+        return $RES;
     }
 
     // --------------------------------------------------------------------
 
+    /**
+     * @param $arg_sql
+     * @return    mixed
+     */
+    protected function _query($arg_sql)
+    {
+        if (!$this->conn_id) {
+            $this->initialize();
+        }
+        return $this->_execute($arg_sql);
+    }
+    // --------------------------------------------------------------------
     /**
      * 执行sql语句
-     * @param $sql
+     * @param $arg_sql
      */
-    protected function _execute($sql)
+    abstract protected function _execute($arg_sql);
+
+    // --------------------------------------------------------------------
+
+    /**
+     * 是否是写入语句
+     * @param $arg_sql
+     * @return bool
+     */
+    public function is_write_type($arg_sql)
     {
+        return (bool)preg_match('/^\s*"?(SET|INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|TRUNCATE|LOAD|COPY|ALTER|RENAME|GRANT|REVOKE|LOCK|UNLOCK|REINDEX)\s/i', $arg_sql);
     }
+
     // --------------------------------------------------------------------
     /**
-     * Start Transaction
+     * 编译绑定变量
      *
-     * @param    bool $test_mode = FALSE
+     * @param    string $arg_sql sql语句
+     * @param    array $arg_binds 绑定数据的数组
+     * @param    bool $arg_assoc =FALSE
+     *               采用关联。
+     *               $this->bind_marker_assoc=':'时，
+     *
+     *               如：a=:a and b=:b   $arg_binds=array('a'=>'1','b'=>'2')。
+     *
+     *               务必确保绑定变量不存在字符串当中，
+     *
+     *               如 a=':a' and b=:b $arg_binds=array('a'=>'1','b'=>'2'),
+     *
+     *               但你可以如此般处理：
+     *
+     *               如 a=':a' and b=:b $arg_binds=array('b'=>'2'),这就不存在:a替换了。
+     *
+     *               还有，此方法无法保证是否所有绑定变量都替换了，也无法确定你给的$arg_binds是否符合数量要求。
+     *
+     *               所以，慎用！
+     *
+     * @return    string
+     */
+    public function compile_binds($arg_sql, $arg_binds, $arg_assoc = FALSE)
+    {
+        if (empty($arg_binds)) return $arg_sql;
+
+        if (!$arg_assoc) {
+
+            if (empty($arg_binds) OR empty($this->bind_marker) OR strpos($arg_sql, $this->bind_marker) === FALSE) {
+                return $arg_sql;
+            }
+            if (!is_array($arg_binds)) {
+                $binds = array($arg_binds);
+                $bind_count = 1;
+            } else {
+                //构建数字索引数组
+                $binds = array_values($arg_binds);
+                $bind_count = count($binds);
+            }
+
+            //我们将需要标记长度
+            $ml = strlen($this->bind_marker);
+
+            // 确保字符串内的标记不被替换
+            if ($c = preg_match_all("/'[^']*'/i", $arg_sql, $matches)) {
+                $c = preg_match_all('/' . preg_quote($this->bind_marker, '/') . '/i',
+                    str_replace($matches[0],
+                        str_replace($this->bind_marker, str_repeat(' ', $ml), $matches[0]),
+                        $arg_sql, $c),
+                    $matches, PREG_OFFSET_CAPTURE);
+
+                // 绑定值数量必须和query句子中的标记的数量相匹配
+                if ($bind_count !== $c) {
+                    return $arg_sql;
+                }
+            } elseif (($c = preg_match_all('/' . preg_quote($this->bind_marker, '/') . '/i', $arg_sql, $matches, PREG_OFFSET_CAPTURE)) !== $bind_count) {
+                return $arg_sql;
+            }
+
+            //循环把标记替换成绑定值
+            do {
+                $c--;
+                $escaped_value = $this->escape($binds[$c]);
+                if (is_array($escaped_value)) {
+                    $escaped_value = '(' . implode(',', $escaped_value) . ')';
+                }
+                $arg_sql = substr_replace($arg_sql, $escaped_value, $matches[0][$c][1], $ml);
+            } while ($c !== 0);
+
+            return $arg_sql;
+
+        } else {//关联数组型处理
+            if (!is_array($arg_binds))
+                return $arg_sql;
+            $patten = array();
+            $replace = array();
+            foreach ($arg_binds as $key => $val) {
+                $patten[] = $this->bind_marker_assoc . $key;
+                $replace[] = $this->escape($val);
+            }
+            $arg_sql = preg_replace($patten, $replace, $arg_sql);
+
+            return $arg_sql;
+        }
+
+    }
+
+// --------------------------------------------------------------------
+
+    /**
+     * 转义字符串
+     *
+     * @param    string
+     * @return    mixed
+     */
+    public function escape($str)
+    {
+        if (is_array($str)) {
+
+            $str = array_map(array(&$this, 'escape'), $str);
+            return $str;
+
+        } elseif (is_string($str) OR (is_object($str) && method_exists($str, '__toString'))) {
+
+            return "'" . str_replace("'", "''", remove_invisible_characters($str)) . "'";
+
+        } elseif (is_bool($str)) {
+
+            return ($str === FALSE) ? 0 : 1;
+
+        } elseif ($str === NULL) {
+
+            return 'NULL';
+        }
+
+        return $str;
+    }
+
+    // --------------------------------------------------------------------
+
+    /**
+     * 加载对应的结果集对象
+     *
+     * @return    string    结果集对象名字
+     */
+    public function load_db_result()
+    {
+        $driver = ucfirst(strtolower($this->dbdriver)) . 'Result';
+        return $driver;
+    }
+
+    // --------------------------------------------------------------------
+    /**
+     * 开始事务
+     *
+     * @param    bool $arg_test_mode = FALSE
      * @return    void
      */
-    public function trans_start($test_mode = FALSE)
+    public function trans_start($arg_test_mode = FALSE)
     {
         if (!$this->trans_enabled) {
             return;
@@ -308,14 +514,14 @@ abstract class DBDriver
             return;
         }
 
-        $this->trans_begin($test_mode);
+        $this->trans_begin($arg_test_mode);
         $this->_trans_depth += 1;
     }
 
     // --------------------------------------------------------------------
 
     /**
-     * Complete Transaction
+     * 完成事务
      *
      * @return    bool
      */
@@ -348,10 +554,10 @@ abstract class DBDriver
 
     /**
      * 事务开启
-     *
+     * @param    bool $arg_test_mode
      * @return    bool
      */
-    abstract public function trans_begin();
+    abstract public function trans_begin($arg_test_mode);
 
     // --------------------------------------------------------------------
 
@@ -384,18 +590,26 @@ abstract class DBDriver
     }
 
     // --------------------------------------------------------------------
+    /**
+     * Error
+     * 返回包含最后一次数据库错误代码和消息的数组。
+     *  array('code'=>'000000','message'=>'')
+     */
+    abstract public function error_info();
+
+    // --------------------------------------------------------------------
 
     /**
-     * @param $code
-     * @param $msg
-     * @param bool|true $throw
+     * @param $arg_code
+     * @param $arg_msg
+     * @param bool|true $arg_throw
      * @throws Exception
      */
-    protected function display_error($code, $msg, $throw = true)
+    protected function display_error($arg_code, $arg_msg, $arg_throw = true)
     {
-        log_message(LOG_ERR, 'DB  code:' . $code . ' message:' . $msg);
-        if ($throw) {
-            throw_e($msg, $code, 'DB');
+        log_message(LOG_ERR, 'DB  code:' . $arg_code . ' message:' . $arg_msg);
+        if ($arg_throw) {
+            throw_e($arg_msg, $arg_code, 'DB');
         }
     }
 
