@@ -93,6 +93,9 @@ class test extends \Controller
 * [ThinkPHP](http://document.thinkphp.cn/manual_3_2.html)
 * [CodeIgniter](http://codeigniter.org.cn/)
 
+## 
+目前没有支持办法映射，不过，用户可以自己实现的。
+
 ## <i name="jsy"></i> 结束语
 在这里我必须向大家坦白，我实现这个简单的框架主要目的还是为了学习，当然我也存在着想拥有一个简单个人的php开发框架以方便开发一些个人项目的想法。
 
