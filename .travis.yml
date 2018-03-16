@@ -1,0 +1,13 @@
+language: php
+php:
+  - '5.6'
+env:
+  global:
+    - CC_TEST_REPORTER_ID=e0f7d5c9ff52faa527f79a7b4c383800b656b992dda94326051eaf1e426acb10
+install:
+  - composer install
+srcipt:
+  - ant test
+  - phpunit --configuration phpunit.xml.dist
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
