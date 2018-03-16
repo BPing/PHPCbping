@@ -1,8 +1,6 @@
 {
   "name": "bping/PHPCbping",
   "description": "简易版php框架",
-  "minimum-stability": "bata",
-  "license": "proprietary",
   "homepage": "https://github.com/BPing/PHPCbping",
   "authors": [
     {
